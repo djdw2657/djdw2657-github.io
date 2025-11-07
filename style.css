@@ -1,0 +1,792 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0a192f;
+    --bg-secondary: #112240;
+    --bg-elevated: #0b2039;
+    --text-primary: #ccd6f6;
+    --text-secondary: #8892b0;
+    --text-muted: #8796c1;
+    --accent: #64ffda;
+    --accent-soft: rgba(100, 255, 218, 0.08);
+    --accent-border: rgba(100, 255, 218, 0.4);
+    --shadow-soft: 0 20px 40px rgba(2, 12, 27, 0.4);
+    --radius-lg: 20px;
+    --radius-md: 12px;
+    --max-width: 1100px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+}
+
+/* 네비게이션 */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent;
+}
+
+.navbar {
+    position: relative;
+    backdrop-filter: blur(18px);
+    background: rgba(10, 25, 47, 0.85);
+    border-bottom: 1px solid rgba(100, 255, 218, 0.05);
+}
+
+.nav-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 1.75rem;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    padding-bottom: 0.2rem;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.navbar.scrolled {
+    box-shadow: var(--shadow-soft);
+    background: rgba(10, 25, 47, 0.95);
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hamburger span {
+    width: 26px;
+    height: 2px;
+    background: var(--text-primary);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 공통 레이아웃 */
+main {
+    padding-top: 90px;
+}
+
+.section {
+    padding: 120px 0;
+}
+
+.section-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.section-number {
+    color: var(--accent);
+    font-family: "Fira Code", "Consolas", monospace;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+}
+
+.section-title {
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+    font-weight: 700;
+}
+
+.section-divider {
+    flex: 1;
+    height: 1px;
+    background: rgba(136, 146, 176, 0.2);
+}
+
+.section-body p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.section-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* 버튼 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.9rem;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #041525;
+    box-shadow: 0 15px 30px rgba(100, 255, 218, 0.15);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 25px 40px rgba(100, 255, 218, 0.25);
+}
+
+.btn-ghost {
+    border: 1px solid var(--accent-border);
+    color: var(--accent);
+    background: transparent;
+}
+
+.btn-ghost:hover {
+    background: rgba(100, 255, 218, 0.1);
+    transform: translateY(-3px);
+}
+
+body.nav-open {
+    overflow: hidden;
+}
+
+/* 히어로 */
+.hero {
+    position: relative;
+    padding: 160px 0 140px;
+    overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+
+.hero::before {
+    width: 380px;
+    height: 380px;
+    right: -120px;
+    top: -80px;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.4), rgba(100, 255, 218, 0));
+}
+
+.hero::after {
+    width: 420px;
+    height: 420px;
+    left: -150px;
+    bottom: -120px;
+    background: radial-gradient(circle, rgba(94, 234, 212, 0.2), rgba(10, 25, 47, 0));
+}
+
+.hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.9fr);
+    gap: 3.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+
+.hero-text {
+    max-width: 720px;
+}
+
+.hero-overline {
+    color: var(--accent);
+    font-family: "Fira Code", "Consolas", monospace;
+    font-size: 0.95rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+}
+
+.hero-highlight {
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+}
+
+.hero-description {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    margin-bottom: 2.2rem;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hero-meta {
+    display: grid;
+    gap: 1rem;
+}
+
+.meta-item {
+    border: 1px solid rgba(136, 146, 176, 0.2);
+    border-radius: var(--radius-md);
+    padding: 1.2rem 1.4rem;
+    background: rgba(17, 34, 64, 0.6);
+}
+
+.meta-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+}
+
+.meta-value {
+    display: block;
+    margin-top: 0.6rem;
+    color: var(--text-primary);
+}
+
+.hero-media {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.photo-frame {
+    position: relative;
+    width: clamp(240px, 28vw, 320px);
+    aspect-ratio: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(100, 255, 218, 0.12), rgba(10, 25, 47, 0.8));
+    border: 1px solid rgba(100, 255, 218, 0.25);
+    box-shadow: 0 25px 45px rgba(2, 12, 27, 0.45);
+}
+
+.photo-frame::after {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(136, 146, 176, 0.2);
+    pointer-events: none;
+}
+
+.photo-ring {
+    position: absolute;
+    inset: -16%;
+    border-radius: 32px;
+    background: radial-gradient(circle, rgba(100, 255, 218, 0.22), rgba(10, 25, 47, 0));
+    opacity: 0.65;
+    filter: blur(12px);
+}
+
+.profile-photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    mix-blend-mode: lighten;
+}
+
+.photo-glow {
+    position: absolute;
+    bottom: -15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 30%;
+    background: radial-gradient(ellipse at center, rgba(100, 255, 218, 0.35), rgba(10, 25, 47, 0));
+    filter: blur(20px);
+    opacity: 0.7;
+}
+
+.scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    animation: float 2.8s ease-in-out infinite;
+}
+
+/* 성격 섹션 */
+.traits-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.traits-card {
+    background: var(--bg-secondary);
+    padding: 2.4rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(136, 146, 176, 0.15);
+    box-shadow: var(--shadow-soft);
+}
+
+.traits-title {
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.8rem;
+}
+
+.traits-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.traits-list li,
+.trait-single {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 1.2rem;
+    align-items: start;
+}
+
+.trait-bullet {
+    font-family: "Fira Code", "Consolas", monospace;
+    color: var(--accent);
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.traits-list h4,
+.trait-single h4 {
+    font-size: 1.15rem;
+    margin-bottom: 0.35rem;
+}
+
+.traits-list p,
+.trait-single p {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+}
+
+/* 생활신조 */
+.philosophy-quote {
+    background: linear-gradient(135deg, rgba(17, 34, 64, 0.9), rgba(10, 25, 47, 0.95));
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    position: relative;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.quote-mark {
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: rgba(100, 255, 218, 0.35);
+    line-height: 1;
+    font-family: "Georgia", serif;
+}
+
+.quote-text p:first-child {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.quote-text p:last-child {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+}
+
+/* 경험 */
+.timeline {
+    display: grid;
+    gap: 2.5rem;
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 28px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(100, 255, 218, 0.4), rgba(100, 255, 218, 0));
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 1.8rem;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: 21px;
+    top: 6px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 6px rgba(100, 255, 218, 0.12);
+}
+
+.timeline-meta {
+    font-family: "Fira Code", "Consolas", monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.timeline-content {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 2rem 2.4rem;
+    border: 1px solid rgba(136, 146, 176, 0.15);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-6px);
+}
+
+.timeline-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+}
+
+.timeline-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+
+.timeline-content p {
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+}
+
+/* 포부 */
+.future-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.future-card {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 2.3rem;
+    border: 1px solid rgba(136, 146, 176, 0.15);
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.future-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(100, 255, 218, 0.7), rgba(100, 255, 218, 0));
+}
+
+.future-index {
+    font-family: "Fira Code", "Consolas", monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+}
+
+.future-card h3 {
+    font-size: 1.35rem;
+    margin: 1rem 0;
+}
+
+.future-card p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+/* 푸터 */
+.footer {
+    padding: 120px 0 80px;
+}
+
+.footer-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.footer-overline {
+    color: var(--accent);
+    font-family: "Fira Code", "Consolas", monospace;
+    font-size: 0.95rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.footer-inner h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 1rem;
+}
+
+.footer-inner p {
+    color: var(--text-secondary);
+    margin-bottom: 2.4rem;
+}
+
+.footer-meta {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* 애니메이션 */
+@keyframes float {
+    0%, 100% {
+        transform: translate(-50%, 0);
+    }
+    50% {
+        transform: translate(-50%, 8px);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 반응형 */
+@media (max-width: 980px) {
+    .nav-menu {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 25, 47, 0.96);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        transform: translateX(100%);
+        transition: transform 0.35s ease;
+    }
+
+    .nav-menu.active {
+        transform: translateX(0);
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 1rem 1.5rem;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content {
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .hero-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-media {
+        order: -1;
+        margin: 0 auto 1.5rem;
+    }
+
+    .section-header {
+        flex-wrap: wrap;
+    }
+
+    .section-divider {
+        width: 100%;
+    }
+
+    .timeline::before {
+        left: 0;
+    }
+
+    .timeline-item {
+        grid-template-columns: 1fr;
+        padding-left: 2rem;
+    }
+
+    .timeline-item::before {
+        left: -6px;
+    }
+}
+
+@media (max-width: 600px) {
+    .section {
+        padding: 90px 0;
+    }
+
+    .section-container {
+        padding: 0 1.5rem;
+    }
+
+    .hero {
+        padding: 130px 0 100px;
+    }
+
+    .hero-content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-meta {
+        width: 100%;
+    }
+
+    .hero-media {
+        margin: 0 auto 2rem;
+    }
+
+    .photo-frame {
+        width: clamp(220px, 60vw, 280px);
+    }
+
+    .traits-card,
+    .timeline-content,
+    .future-card,
+    .philosophy-quote {
+        padding: 1.8rem;
+    }
+
+    .traits-list li,
+    .trait-single {
+        grid-template-columns: 36px 1fr;
+    }
+
+    .timeline-item {
+        padding-left: 1.2rem;
+    }
+}
+
